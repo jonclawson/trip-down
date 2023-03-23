@@ -1,0 +1,53 @@
+<div class="btn-group" dropdown [insideClick]="true" [isDisabled]="disabled">
+  <div id="button-basic" dropdownToggle type="button">
+    <input
+      (keyup)="disabled = true"
+      (blur)="disabled = false"
+      (typeaheadOnSelect)="valueChange()"
+      [(ngModel)]="selectedValue"
+      [typeahead]="options"
+      typeaheadOptionField="value"
+      [typeaheadItemTemplate]="typeaheadtemplate"
+      class="form-control"
+    />
+    <span class="caret"></span>
+    <ng-template #typeaheadtemplate let-item="item" let-index="index">
+      <h5>{{ item.value }}</h5>
+    </ng-template>
+  </div>
+
+  <ng-template #menuOptions let-opts="options">
+    <li *ngFor="let option of opts" role="menuitem">
+      <a
+        *ngIf="!!option.options; else noOptions"
+        class="dropdown-item"
+        href="#"
+        [popover]="menuOptions"
+        [popoverContext]="{ options: option.options }"
+        triggers="mouseenter"
+        placement="right"
+      >
+        {{ option.value }} Options
+      </a>
+      <ng-template #noOptions>
+        <a
+          (click)="selected = option; selectedValue = selected.value"
+          class="dropdown-item"
+          href="#"
+          >{{ option.value }}</a
+        >
+      </ng-template>
+    </li>
+  </ng-template>
+
+  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu">
+    <ng-container
+      *ngTemplateOutlet="menuOptions; context: { options: this.options }"
+    ></ng-container>
+  </ul>
+</div>
+
+<pre class="card card-block card-header mb-3">
+  Model: {{ selected | json }} 
+  Value: {{ selectedValue }}</pre
+>
