@@ -1,10 +1,8 @@
 import 'zone.js/dist/zone';
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { bootstrapApplication } from '@angular/platform-browser';
 import {
   BrowserAnimationsModule,
-  NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { FormsModule } from '@angular/forms';
