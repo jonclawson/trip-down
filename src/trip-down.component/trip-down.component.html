@@ -5,7 +5,7 @@
       (blur)="disabled = false"
       (typeaheadOnSelect)="valueChange()"
       [(ngModel)]="selectedValue"
-      [typeahead]="options"
+      [typeahead]="flatOptions"
       typeaheadOptionField="value"
       [typeaheadItemTemplate]="typeaheadtemplate"
       class="form-control"
