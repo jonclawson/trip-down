@@ -1,5 +1,5 @@
 import 'zone.js/dist/zone';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 @Component({
   selector: 'trip-down',
   templateUrl: './trip-down.component.html',
@@ -12,6 +12,8 @@ export class TripDownComponent implements OnChanges, OnInit {
   selectedValue;
   disabled = false;
   flatOptions = []
+  @Output() change = new EventEmitter<any>();
+  @ViewChild('input') input: ElementRef;
 
   ngOnInit() {
     this.getFlatOptions(this.options)
@@ -36,7 +38,14 @@ export class TripDownComponent implements OnChanges, OnInit {
 
   valueChange() {
     this.selected = this.flatOptions.find(o => o.value == this.selectedValue);
-    console.log('valueChange', this.selectedValue, this.selected);
+    this.change.emit(this.selected);
+  }
+
+  selectOption(option) {
+    this.selected = option; 
+    this.selectedValue = this.selected.value;
+    this.change.emit(this.selected);
+    this.input.nativeElement.click();
   }
 
 }

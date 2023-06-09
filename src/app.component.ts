@@ -84,4 +84,8 @@ export class AppComponent {
     'Wisconsin',
     'Wyoming',
   ];
+
+  onChange(option) {
+    this.selected = option;
+  }
 }

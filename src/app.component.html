@@ -5,5 +5,10 @@
     <i>Has some issues to work out.</i>
   </p>
 
-  <trip-down [options]="objects"></trip-down>
+  <label>Select or type an option</label>
+  <trip-down [options]="objects" (change)="onChange($event)"></trip-down>
+
+  <label>Selected Option</label>
+  <pre class="card card-block card-header mb-3">Model: {{ selected | json }}</pre
+  >
 </div>
